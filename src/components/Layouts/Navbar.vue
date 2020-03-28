@@ -1,16 +1,19 @@
 <template>
     <div class="navbar">
-        <nav class="deep-black darken-1">
+        <nav class="black darken-1">
             <div class="container">
                 <a href="" class="brand-logo left">
                     Know People Worldwide
                 </a>
                 <ul class="right">
                   <li>
-                      <a href="">Signup</a>
+                      <router-link :to="{name:'signup'}">Signup</router-link>
                   </li>
                   <li>
-                      <a href="">Login</a>
+                      <router-link href="">Login</router-link>
+                  </li>
+                     <li>
+                      <router-link href="">Logout</router-link>
                   </li>
                 </ul>
             </div>
