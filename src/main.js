@@ -9,7 +9,7 @@ Vue.config.productionTip = false
 //wait for firebase auth to init before creating the application
 let app = null;
 
-firebase.auth().onAuthStateChanged(()=>{
+firebase.auth().onAuthStateChanged(() => {
 if(!app){
  app = new Vue({
   el: '#app',

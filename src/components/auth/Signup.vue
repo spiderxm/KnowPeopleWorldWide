@@ -1,6 +1,5 @@
 <template> 
-<div class="container">
-    <div class="signup">
+<div class="signup container">
         <form action="" @submit.prevent="signup" class="card-panel">
             <h2 class="center black-text">Signup</h2>
             <div class="field">
@@ -20,9 +19,8 @@
                 <p v-if="feedback" class="center red-text">{{feedback}}</p>
             </div>
 
-            <div class="field center"><button class="btn black">Signup</button></div>
+            <div class="field center"><button class="btn bl black">Signup</button></div>
         </form>
-    </div>
 </div>
 </template>
 <script>
@@ -57,7 +55,7 @@ export default {
                         this.feedback="This alias already exists";
                     }
                     else{
-                        firebase.auth().createUserWithEmailAndPassword(this.email,this.password).then(cred =>{
+                        firebase.auth().createUserWithEmailAndPassword(this.email,this.password).then(cred => {
                             console.log(cred.user);
                           ref.set({
                               alias: this.alias,
@@ -83,8 +81,8 @@ export default {
 
 <style>
 .signup {
-    max-width: 400px;
-    margin: 60px;
+    max-width: 500px;
+    margin-top: 60px;
 }
 .signup h2{
     font-size: 2.4em;

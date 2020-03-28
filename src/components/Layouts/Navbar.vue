@@ -1,19 +1,21 @@
 <template>
     <div class="navbar">
-        <nav class="black darken-1">
+        <nav class="black blacky darken-1">
             <div class="container">
-                <a href="" class="brand-logo left">
+                <router-link  :to="{'name':'gmap'}" class="brand-logo left">
                     Know People Worldwide
-                </a>
+                </router-link>
                 <ul class="right">
                   <li>
-                      <router-link :to="{name:'signup'}">Signup</router-link>
+                      <router-link v-if="!user" :to="{name:'signup'}">Signup</router-link>
                   </li>
                   <li>
-                      <router-link href="">Login</router-link>
+                      <router-link v-if="!user" :to="{name:'login'}">Login</router-link>
                   </li>
-                     <li>
-                      <router-link href="">Logout</router-link>
+                  <li v-if="user">
+                    <a>{{user.email}}</a>
+                  <li>
+                      <a v-if="user" @click="logout">Logout</a>
                   </li>
                 </ul>
             </div>
@@ -21,15 +23,37 @@
     </div>
 </template>
 <script>
+import firebase from 'firebase'
 export default {
     name:'Navbar',
     data(){
         return {
-
+          user:null
         }
+    },
+    methods:{
+        logout(){
+          firebase.auth().signOut().then(()=>{
+              this.$router.push({'name':'login'})
+          }).catch(err => console.log(err))
+        }
+    },
+    created(){
+      firebase.auth().onAuthStateChanged((user) => {
+         if(user){
+             this.user = user
+         }
+         else{ 
+              this.user = null
+         }
+      })
+
+
     }
 }
 </script>  
-<style>
-
+<style >
+.blacky{
+    border-bottom-right-radius:40px;  
+}
 </style>
