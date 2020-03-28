@@ -1,9 +1,12 @@
 <template>
-    <div class="vue-profile container">
+    <div class="view-profile container">
        <div v-if="profile" class="card">
            <h2 class="black-text center">{{profile.alias}}'s Wall</h2>
            <ul class="comments collection">
-               <li>comment</li>
+               <li v-for="(comment,index) in comments" :key="index">
+                   <div class="black-text">{{comment.from}}</div>
+                   <div class="grey-text text-darken-2">{{comment.content}}</div>
+               </li>
            </ul>
            <form @submit.prevent="addcomments">
                <div class="field">
@@ -25,7 +28,8 @@ export default {
             profile: null,
             feedback:null,
             newcomment:null,
-            user :null
+            user :null,
+            comments: []
         }
     },
     methods:{
@@ -34,7 +38,7 @@ export default {
               this.feedback = null
               db.collection('comments').add({
                   to : this.$route.params.id,
-                  from : this.user.id,
+                  from : this.user.alias,
                   content : this.newcomment,
                   time: Date.now()
               }).then(()=>{
@@ -57,12 +61,44 @@ export default {
                 })
             }
         );
+        //comments
+        db.collection('comments').where('to','==',this.$route.params.id)
+        .onSnapshot((snapshot) => {
+            snapshot.docChanges().forEach(change => {
+                if(change.type == "added"){
+                   this.comments.unshift({
+                  from : change.doc.data().from,
+                  content :  change.doc.data().content,
+                   })
+                }
+            })
+        })
+
+        //profile data
         ref.doc(this.$route.params.id).get()
         .then(user => {
             this.profile = user.data()
         })
+
+
     }
 }
 
 
 </script>
+
+<style scoped>
+.view-profile .card{
+    padding:20px;
+    margin-top :60px;
+
+}
+.view-profile h2{
+    font-size: 2em;
+    margin-top:0;
+}
+.view-profile li{
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+</style>

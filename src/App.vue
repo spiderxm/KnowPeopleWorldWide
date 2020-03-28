@@ -6,6 +6,7 @@
 </template>
 
 <script>
+
 import Navbar from '@/components/Layouts/Navbar'
 export default {
   name: 'App',
@@ -16,5 +17,7 @@ export default {
 </script>
 
 <style>
-
+body{
+  background: black;
+}
 </style>

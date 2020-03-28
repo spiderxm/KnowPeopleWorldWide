@@ -2,7 +2,7 @@
     <div class="navbar">
         <nav class="black blacky darken-1">
             <div class="container">
-                <router-link  :to="{'name':'gmap'}" class="brand-logo left">
+                <router-link  :to="{'name':'Gmap'}" class="brand-logo left">
                     Know People Worldwide
                 </router-link>
                 <ul class="right">
