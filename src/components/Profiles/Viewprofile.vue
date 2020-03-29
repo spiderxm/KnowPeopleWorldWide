@@ -1,5 +1,5 @@
 <template>
-    <div class="view-profile container">
+    <div class="view-profile container blacky">
        <div v-if="profile" class="card">
            <h2 class="black-text center">{{profile.alias}}'s Wall</h2>
            <ul class="comments collection">
@@ -100,5 +100,12 @@ export default {
 .view-profile li{
     padding: 10px;
     border-bottom: 1px solid #eee;
+}
+.card{
+    border-radius: 40px;
+}
+.comments{
+        border-radius: 40px;
+
 }
 </style>
